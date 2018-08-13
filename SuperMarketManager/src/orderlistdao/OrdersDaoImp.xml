@@ -1,0 +1,56 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="orderlistdao.OrdersDao">
+<resultMap type="orderlist.Address" id="selectAddressResultMap">
+<id column="address_id" property="ad_id"/>
+<result column="address_recive" property="ad_name"/>
+<result column="address_tel" property="ad_tel"/>
+<result column="address_add" property="ad_add"/>
+<result column="user_id" property="ad_userid"/>
+</resultMap>
+<resultMap type="orderlist.OrderInfo" id="ordersResultMap">
+<id column="order_id" property="ding_id"/>
+<result column="order_status" property="ding_status"/>
+<result column="order_date" property="ding_date"/>
+<result column="order_toatls" property="ding_toatls"/>
+<result column="order_userid" property="ding_userid"/>
+<result column="order_addid" property="ding_address"/>
+</resultMap>
+<resultMap type="orderlist.ShopCart" id="shopcartsResultMap">
+<id column="gds_id" property="id"/>
+<result column="gds_name" property="name"/>
+<result column="gds_discription" property="discription"/>
+<result column="gds_price" property="price"/>
+<result column="gds_date" property="date"/>
+<result column="gds_qgp" property="qgp"/>
+<result column="gds_type" property="type"/>
+<result column="gds_place" property="place"/>
+<result column="gds_size" property="size"/>
+<result column="gds_remain" property="remain"/>
+<result column="goodscount" property="count"/>
+</resultMap>
+<select id="selectAllorders" resultMap="ordersResultMap">
+select * from  (select order_ding.*,rownum as rm from order_ding order by order_date desc) b  
+where b.rm between #{pp} and #{pp}+5
+</select>
+<select id="selectShopCartList" resultMap="shopcartsResultMap">
+select gds_id,
+gds_name,
+gds_discription, 
+gds_price,
+gds_date,
+gds_qgp,
+gds_type, 
+gds_place,
+gds_size,
+gds_remain, 
+goodscount
+ from gds_list g,order_goods d where g.gds_id=d.goodsid and orderid=#{ding_id}
+</select>
+<select id="selectAddressId" resultMap="selectAddressResultMap">
+select * from sm_address where address_id=#{ad_id}
+</select>
+<select id="selectOrderNum" resultType="Integer">
+select count(*) from order_ding
+</select>
+</mapper>
