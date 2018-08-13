@@ -1,0 +1,31 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE struts PUBLIC
+	"-//Apache Software Foundation//DTD Struts Configuration 2.3//EN"
+	"http://struts.apache.org/dtds/struts-2.3.dtd">
+
+<struts>
+<package name="orders" extends="struts-default" >
+<action name="addtocart" class="orders.Shopping" method="addtocart">
+</action>
+<action name="updatecart" class="orders.Shopping" method="updatecart">
+</action>
+<action name="deletefromcart" class="orders.Shopping" method="deletefromcart">
+</action>
+<action name="deleteall" class="orders.Shopping" method="deleteAll">
+</action>
+<action name="buyone" class="orders.BeforePay" method="buyOne">
+<result name="buyone" >/home/pay.jsp</result>
+</action>
+<action name="buymore" class="orders.BeforePay" method="buymore">
+<result name="buymore" >/home/pay.jsp</result>
+</action>
+<action name="chooseaddress" class="orders.BeforePay" method="chooseAddress">
+</action>
+<action name="Chat" class="orders.Chat"  method="chat"></action>
+
+
+
+</package>
+
+
+</struts>

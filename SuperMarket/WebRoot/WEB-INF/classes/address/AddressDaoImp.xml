@@ -1,0 +1,25 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="address.AddressDao">
+<resultMap type="address.Address" id="selectAddressResultMap">
+<id column="address_id" property="ad_id"/>
+<result column="address_recive" property="ad_name"/>
+<result column="address_tel" property="ad_tel"/>
+<result column="address_add" property="ad_add"/>
+<result column="user_id" property="ad_userid"/>
+</resultMap>
+
+<select id="selectByUserId" resultMap="selectAddressResultMap">
+select * from sm_address where user_id=#{id}
+</select>
+<select id="selectById" resultMap="selectAddressResultMap">
+select * from sm_address where address_id=#{id}
+</select>
+
+<insert id="AddNewAddress" parameterType="address.Address" >
+insert into sm_address values(to_number(#{ad_id}),#{ad_name},#{ad_tel},#{ad_add},to_char(#{ad_userid}))
+</insert>
+<delete id="deleteAddress" parameterType="String">
+delete from sm_address where address_id=#{id}
+</delete>
+</mapper>

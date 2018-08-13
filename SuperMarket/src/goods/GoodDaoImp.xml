@@ -1,0 +1,34 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="goods.GoodDao">
+<resultMap type="goods.Goods" id="selectGoodsResultMap">
+<id column="gds_id" property="id"/>
+<result column="gds_name" property="name"/>
+<result column="gds_discription" property="discription"/>
+<result column="gds_price" property="price"/>
+<result column="gds_date" property="date"/>
+<result column="gds_qgp" property="qgp"/>
+<result column="gds_type" property="type"/>
+<result column="gds_place" property="place"/>
+<result column="gds_size" property="size"/>
+<result column="gds_remain" property="remain"/>
+<result column="gds_fid" property="fgds"/>
+
+</resultMap>
+<resultMap type="goods.Fen" id="selectFenResultMap">
+<id column="f_id" property="fenId"/>
+<result column="f_name" property="fenName"/>
+</resultMap>
+<select id="selectFen" resultMap="selectFenResultMap">
+select * from f_fen
+</select>
+<select id="selectAllGoods" resultMap="selectGoodsResultMap">
+select * from gds_list
+</select>
+<select id="selectGood" resultMap="selectGoodsResultMap">
+select * from gds_list where gds_id=#{id}
+</select>
+<update id="updateKu" >
+update gds_list set gds_remain=to_number(#{1}) where gds_id=#{0}
+</update>
+</mapper>

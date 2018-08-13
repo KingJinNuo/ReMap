@@ -1,0 +1,44 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE struts PUBLIC
+	"-//Apache Software Foundation//DTD Struts Configuration 2.3//EN"
+	"http://struts.apache.org/dtds/struts-2.3.dtd">
+
+<struts>
+<package name="strut2" extends="struts-default" >
+
+<!--用户注册 -->
+<action name="register" class="action.Register"  method="register">
+<result name="register" type="chain">toMain</result>
+<result name="registererror" type="redirect">/home/register.jsp</result>
+</action>
+<!--用户登录 -->
+<action name="login" class="action.Login"  method="login">
+<interceptor-ref name="token"></interceptor-ref>
+<interceptor-ref name="defaultStack"></interceptor-ref>
+<result  name="invalid.token">/home/more.jsp</result>
+<result name="login" type="chain">toMain</result>
+<result name="loginerror" type="redirect">/home/loginFail.jsp</result>
+</action>
+<!--异步判断id是否被注册-->
+<action name="checkid" class="action.CheckID" method="checkid" >
+</action>
+<!--发送短信-->
+<action name="sendmessage" class="action.SendMessage" method="sendmessage" >
+</action>
+<!--验证短信-->
+<action name="checkmessagecode" class="action.CheckMessageCode" method="checkmessagecode" >
+</action>
+<!--登录主页-->
+<action name="toMain" class="action.ToMian" method="listGoods">
+<result name="allgoods">/home/home.jsp</result>
+</action>
+<!-- 取消订单 -->
+<action name="cancel" class="action.CancelOrder">
+<result name="allgoods" type="chain">toMain</result>
+</action>
+<action name="updateinfo" class="action.UpdateInfo" method="updateInfo">
+</action>
+</package>
+
+
+</struts>
