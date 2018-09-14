@@ -1,0 +1,31 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.cmos.dao.OrganizationDao">
+  <resultMap id="BaseResultMap" type="com.cmos.domain.Organization">
+    <id column="org_id" jdbcType="INTEGER" property="orgId" />
+    <result column="org_name" jdbcType="VARCHAR" property="orgName" />
+    <result column="dis_id" jdbcType="INTEGER" property="disId" />
+  </resultMap>
+
+  <select id="selectAll"  resultMap="BaseResultMap">
+    select org_id,org_name,dis_id
+    from organization
+  </select>
+
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer">
+    delete from organization
+    where org_id = #{orgId,jdbcType=INTEGER}
+  </delete>
+
+  <insert id="insert" parameterType="com.cmos.domain.Organization">
+    insert into organization (org_id, org_name, dis_id)
+    values (#{orgId,jdbcType=INTEGER}, #{orgName,jdbcType=VARCHAR}, #{disId,jdbcType=INTEGER})
+  </insert>
+
+  <update id="updateByExample" parameterType="com.cmos.domain.Organization">
+    update organization
+    set org_name = #{example.orgName,jdbcType=VARCHAR},
+      dis_id = #{example.disId,jdbcType=INTEGER}
+    where org_id = #{example.orgId,jdbcType=INTEGER}
+  </update>
+</mapper>

@@ -1,0 +1,28 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.cmos.dao.DistrictDao">
+  <resultMap id="BaseResultMap" type="com.cmos.domain.District">
+    <id column="dis_id" jdbcType="INTEGER" property="disId" />
+    <result column="dis_name" jdbcType="VARCHAR" property="disName" />
+  </resultMap>
+
+  <select id="selectAll"  resultMap="BaseResultMap">
+    select dis_id,dis_name from district
+  </select>
+
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer">
+    delete from district
+    where dis_id = #{disId,jdbcType=INTEGER}
+  </delete>
+
+  <insert id="insert" parameterType="com.cmos.domain.District">
+    insert into district (dis_id, dis_name)
+    values (#{disId,jdbcType=INTEGER}, #{disName,jdbcType=VARCHAR})
+  </insert>
+
+  <update id="updateByExample" parameterType="com.cmos.domain.District">
+    update district
+    set dis_name = #{example.disName,jdbcType=VARCHAR}
+    where dis_id = #{example.disId,jdbcType=INTEGER}
+  </update>
+</mapper>
